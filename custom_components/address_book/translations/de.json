@@ -1,0 +1,158 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Speicherort wählen",
+        "menu_options": {
+          "postgres": "PostgreSQL",
+          "mariadb": "MariaDB",
+          "file": "Textdatei (JSON)"
+        }
+      },
+      "postgres": {
+        "title": "PostgreSQL-Verbindung",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "database": "Datenbank",
+          "username": "Benutzer",
+          "password": "Passwort",
+          "ssl": "SSL verwenden"
+        }
+      },
+      "mariadb": {
+        "title": "MariaDB-Verbindung",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "database": "Datenbank",
+          "username": "Benutzer",
+          "password": "Passwort",
+          "ssl": "SSL verwenden"
+        }
+      },
+      "file": {
+        "title": "Textdatei",
+        "data": {
+          "file_path": "Dateipfad"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zur Datenbank fehlgeschlagen",
+      "path_not_allowed": "Pfad ist in Home Assistant nicht erlaubt (allowlist_external_dirs)",
+      "cannot_open_file": "Datei kann nicht gelesen oder geschrieben werden"
+    },
+    "abort": {
+      "already_configured": "Dieser Speicherort ist bereits eingerichtet"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "contact_count": {
+        "name": "Anzahl Kontakte"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_name": {
+      "message": "Name darf nur Buchstaben und Ziffern enthalten"
+    },
+    "invalid_first_name": {
+      "message": "Vorname darf nur Buchstaben und Ziffern enthalten"
+    },
+    "invalid_group_name": {
+      "message": "Gruppenname darf nur Buchstaben und Ziffern enthalten"
+    },
+    "invalid_mobile": {
+      "message": "Mobilnummer darf nur Ziffern und ein führendes + enthalten"
+    },
+    "invalid_whatsapp_id": {
+      "message": "WhatsApp-ID darf nur Ziffern enthalten"
+    },
+    "first_name_or_group_required": {
+      "message": "Vorname oder Gruppenname muss angegeben werden"
+    },
+    "contact_not_found": {
+      "message": "Kontakt nicht gefunden"
+    }
+  },
+  "services": {
+    "add_contact": {
+      "name": "Kontakt hinzufügen",
+      "description": "Legt einen Kontakt an. Vorname oder Gruppenname ist Pflicht.",
+      "fields": {
+        "name": {
+          "name": "Name",
+          "description": "Nachname"
+        },
+        "first_name": {
+          "name": "Vorname",
+          "description": "Vorname"
+        },
+        "group_name": {
+          "name": "Gruppenname",
+          "description": "Name der Gruppe"
+        },
+        "mobile": {
+          "name": "Mobilnummer",
+          "description": "Nur Ziffern, optional mit führendem +"
+        },
+        "whatsapp_id": {
+          "name": "WhatsApp-ID",
+          "description": "Nur Ziffern"
+        }
+      }
+    },
+    "update_contact": {
+      "name": "Kontakt ändern",
+      "description": "Ändert die angegebenen Felder; null leert ein Feld.",
+      "fields": {
+        "id": {
+          "name": "ID",
+          "description": "ID des Kontakts"
+        },
+        "name": {
+          "name": "Name",
+          "description": "Nachname"
+        },
+        "first_name": {
+          "name": "Vorname",
+          "description": "Vorname"
+        },
+        "group_name": {
+          "name": "Gruppenname",
+          "description": "Name der Gruppe"
+        },
+        "mobile": {
+          "name": "Mobilnummer",
+          "description": "Nur Ziffern, optional mit führendem +"
+        },
+        "whatsapp_id": {
+          "name": "WhatsApp-ID",
+          "description": "Nur Ziffern"
+        }
+      }
+    },
+    "delete_contact": {
+      "name": "Kontakt löschen",
+      "description": "Löscht einen Kontakt.",
+      "fields": {
+        "id": {
+          "name": "ID",
+          "description": "ID des Kontakts"
+        }
+      }
+    },
+    "search_contacts": {
+      "name": "Kontakte suchen",
+      "description": "Liefert Kontakte, optional gefiltert nach Suchtext.",
+      "fields": {
+        "query": {
+          "name": "Suchtext",
+          "description": "Teil eines beliebigen Feldes"
+        }
+      }
+    }
+  }
+}

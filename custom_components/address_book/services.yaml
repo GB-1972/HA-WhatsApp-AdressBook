@@ -1,0 +1,31 @@
+add_contact:
+  fields:
+    name: &f_name
+      selector: {text: {}}
+    first_name: &f_first
+      selector: {text: {}}
+    group_name: &f_group
+      selector: {text: {}}
+    mobile: &f_mobile
+      selector: {text: {type: tel}}
+    whatsapp_id: &f_wa
+      selector: {text: {}}
+update_contact:
+  fields:
+    id:
+      required: true
+      selector: {number: {min: 1, mode: box}}
+    name: *f_name
+    first_name: *f_first
+    group_name: *f_group
+    mobile: *f_mobile
+    whatsapp_id: *f_wa
+delete_contact:
+  fields:
+    id:
+      required: true
+      selector: {number: {min: 1, mode: box}}
+search_contacts:
+  fields:
+    query:
+      selector: {text: {}}

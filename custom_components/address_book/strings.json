@@ -1,0 +1,158 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Choose storage",
+        "menu_options": {
+          "postgres": "PostgreSQL",
+          "mariadb": "MariaDB",
+          "file": "Text file (JSON)"
+        }
+      },
+      "postgres": {
+        "title": "PostgreSQL connection",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "database": "Database",
+          "username": "Username",
+          "password": "Password",
+          "ssl": "Use SSL"
+        }
+      },
+      "mariadb": {
+        "title": "MariaDB connection",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "database": "Database",
+          "username": "Username",
+          "password": "Password",
+          "ssl": "Use SSL"
+        }
+      },
+      "file": {
+        "title": "Text file",
+        "data": {
+          "file_path": "File path"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the database",
+      "path_not_allowed": "Path not allowed (see allowlist_external_dirs)",
+      "cannot_open_file": "File cannot be read or written"
+    },
+    "abort": {
+      "already_configured": "This storage is already configured"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "contact_count": {
+        "name": "Contact count"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_name": {
+      "message": "Name may only contain letters and digits"
+    },
+    "invalid_first_name": {
+      "message": "First name may only contain letters and digits"
+    },
+    "invalid_group_name": {
+      "message": "Group name may only contain letters and digits"
+    },
+    "invalid_mobile": {
+      "message": "Mobile may only contain digits and a leading +"
+    },
+    "invalid_whatsapp_id": {
+      "message": "WhatsApp ID may only contain digits"
+    },
+    "first_name_or_group_required": {
+      "message": "First name or group name is required"
+    },
+    "contact_not_found": {
+      "message": "Contact not found"
+    }
+  },
+  "services": {
+    "add_contact": {
+      "name": "Kontakt hinzufügen",
+      "description": "Legt einen Kontakt an. Vorname oder Gruppenname ist Pflicht.",
+      "fields": {
+        "name": {
+          "name": "Name",
+          "description": "Nachname"
+        },
+        "first_name": {
+          "name": "Vorname",
+          "description": "Vorname"
+        },
+        "group_name": {
+          "name": "Gruppenname",
+          "description": "Name der Gruppe"
+        },
+        "mobile": {
+          "name": "Mobilnummer",
+          "description": "Nur Ziffern, optional mit führendem +"
+        },
+        "whatsapp_id": {
+          "name": "WhatsApp-ID",
+          "description": "Nur Ziffern"
+        }
+      }
+    },
+    "update_contact": {
+      "name": "Kontakt ändern",
+      "description": "Ändert die angegebenen Felder; null leert ein Feld.",
+      "fields": {
+        "id": {
+          "name": "ID",
+          "description": "ID des Kontakts"
+        },
+        "name": {
+          "name": "Name",
+          "description": "Nachname"
+        },
+        "first_name": {
+          "name": "Vorname",
+          "description": "Vorname"
+        },
+        "group_name": {
+          "name": "Gruppenname",
+          "description": "Name der Gruppe"
+        },
+        "mobile": {
+          "name": "Mobilnummer",
+          "description": "Nur Ziffern, optional mit führendem +"
+        },
+        "whatsapp_id": {
+          "name": "WhatsApp-ID",
+          "description": "Nur Ziffern"
+        }
+      }
+    },
+    "delete_contact": {
+      "name": "Kontakt löschen",
+      "description": "Löscht einen Kontakt.",
+      "fields": {
+        "id": {
+          "name": "ID",
+          "description": "ID des Kontakts"
+        }
+      }
+    },
+    "search_contacts": {
+      "name": "Kontakte suchen",
+      "description": "Liefert Kontakte, optional gefiltert nach Suchtext.",
+      "fields": {
+        "query": {
+          "name": "Suchtext",
+          "description": "Teil eines beliebigen Feldes"
+        }
+      }
+    }
+  }
+}
