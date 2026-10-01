@@ -9,6 +9,23 @@ Speicherung wahlweise in **PostgreSQL**, **MariaDB** oder als **JSON-Datei**.
 
 Danach Home Assistant neu starten und *Einstellungen → Geräte & Dienste → Integration hinzufügen → Adressbuch* wählen.
 
+## Oberfläche (Seitenleiste „Adressbuch“)
+Nach der Einrichtung erscheint in der Seitenleiste (nur für Administratoren) der Eintrag **Adressbuch**:
+- Kontakte suchen, sortieren, anlegen, bearbeiten und löschen – mit Live-Prüfung der Felder
+- Mobilnummer und WhatsApp-ID sind direkt anklickbar (`tel:` bzw. `wa.me`)
+- **CSV-Import** per Datei-Upload oder Drag & Drop, mit Vorschau vor dem Import
+- **CSV-Export** (Excel-tauglich, `;`-getrennt, UTF-8) und eine Import-Vorlage
+- Dunkel-/Hell-Modus, Deutsch/Englisch, Smartphone-Ansicht
+
+### CSV-Import
+- Erste Zeile = Spaltenüberschriften. Erkannt werden u. a. `Name`/`Nachname`, `Vorname`/`First name`,
+  `Gruppenname`/`Gruppe`, `Mobilnummer`/`Mobil`/`Handy`/`Telefon`, `WhatsApp-ID`/`WhatsApp`. Weitere Spalten werden ignoriert.
+- Trennzeichen (`;` `,` Tab) und Zeichensatz (UTF-8 oder Windows-1252) werden automatisch erkannt.
+- Leerzeichen, `-`, `/`, `()` in Nummern werden entfernt, `0049…` wird zu `+49…`; bei der WhatsApp-ID wird ein führendes `+` entfernt.
+- Jede Zeile wird nach den Feldregeln unten geprüft. Fehlerhafte Zeilen werden in der Vorschau markiert und nicht importiert.
+- Optional werden bereits vorhandene Kontakte übersprungen (gleicher Name, Vorname, Gruppe und Mobilnummer).
+- Maximal 5000 Zeilen / 5 MB pro Datei.
+
 ## Speicherort
 - **PostgreSQL / MariaDB:** Host, Port, Datenbank, Benutzer, Passwort (optional SSL). Die Tabelle
   `address_book_contacts` wird automatisch angelegt (der DB-Benutzer braucht `CREATE`). MariaDB ab 10.2.

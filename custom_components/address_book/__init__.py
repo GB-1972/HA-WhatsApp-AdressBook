@@ -18,6 +18,7 @@ from .const import (
     ATTR_WHATSAPP_ID, DOMAIN, SERVICE_ADD_CONTACT, SERVICE_DELETE_CONTACT,
     SERVICE_SEARCH_CONTACTS, SERVICE_UPDATE_CONTACT, SIGNAL_CONTACTS_CHANGED,
 )
+from .api import async_remove_panel, async_setup_api
 from .backends import AddressBookBackend, async_create_backend
 from .validation import ContactValidationError, validate_contact
 
@@ -116,6 +117,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         DOMAIN, SERVICE_SEARCH_CONTACTS, _wrap(search_contacts), SEARCH_SCHEMA,
         supports_response=SupportsResponse.ONLY)
 
+    await async_setup_api(hass)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
@@ -126,6 +128,8 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         return False
     db: AddressBookBackend = hass.data[DOMAIN].pop(entry.entry_id)
     await db.close()
+    if not hass.data[DOMAIN]:
+        async_remove_panel(hass)
     for service in (SERVICE_ADD_CONTACT, SERVICE_UPDATE_CONTACT,
                     SERVICE_DELETE_CONTACT, SERVICE_SEARCH_CONTACTS):
         hass.services.async_remove(DOMAIN, service)

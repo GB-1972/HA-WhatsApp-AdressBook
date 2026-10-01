@@ -3,10 +3,11 @@
   "name": "Adressbuch",
   "codeowners": ["@GB-1972"],
   "config_flow": true,
+  "dependencies": ["http", "websocket_api", "frontend", "panel_custom"],
   "documentation": "https://github.com/GB-1972/ha-whatsapp-adressbook",
   "integration_type": "service",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/GB-1972/ha-whatsapp-adressbook/issues",
   "requirements": ["asyncpg>=0.29.0", "aiomysql>=0.2.0"],
-  "version": "0.0.1"
+  "version": "0.1.0"
 }
