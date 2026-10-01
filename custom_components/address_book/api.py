@@ -39,6 +39,8 @@ def _changed(hass: HomeAssistant) -> None:
 
 
 # --------------------------------------------------------------------------- websocket
+# NOTE: msg["id"] is the websocket message number, so the contact id is
+# transported as "contact_id".
 _OPT = vol.Any(None, str)
 
 
@@ -60,7 +62,7 @@ async def ws_list(hass: HomeAssistant, connection, msg) -> None:
 @websocket_api.websocket_command(
     {
         vol.Required("type"): f"{DOMAIN}/save",
-        vol.Optional("id"): int,
+        vol.Optional("contact_id"): int,
         **{vol.Optional(f): _OPT for f in FIELDS},
     }
 )
@@ -77,8 +79,8 @@ async def ws_save(hass: HomeAssistant, connection, msg) -> None:
         connection.send_error(msg["id"], "invalid", str(err))
         return
     try:
-        if "id" in msg:
-            row = await db.replace(msg["id"], contact)
+        if "contact_id" in msg:
+            row = await db.replace(msg["contact_id"], contact)
             if row is None:
                 connection.send_error(msg["id"], "not_found", "contact_not_found")
                 return
@@ -93,7 +95,7 @@ async def ws_save(hass: HomeAssistant, connection, msg) -> None:
 
 
 @websocket_api.websocket_command(
-    {vol.Required("type"): f"{DOMAIN}/delete", vol.Required("id"): int}
+    {vol.Required("type"): f"{DOMAIN}/delete", vol.Required("contact_id"): int}
 )
 @websocket_api.require_admin
 @websocket_api.async_response
@@ -103,7 +105,7 @@ async def ws_delete(hass: HomeAssistant, connection, msg) -> None:
         connection.send_error(msg["id"], "not_loaded", "address_book_not_loaded")
         return
     try:
-        deleted = await db.delete(msg["id"])
+        deleted = await db.delete(msg["contact_id"])
     except Exception as err:  # noqa: BLE001
         _LOGGER.error("Address book delete failed: %s", err)
         connection.send_error(msg["id"], "db_error", "db_error")

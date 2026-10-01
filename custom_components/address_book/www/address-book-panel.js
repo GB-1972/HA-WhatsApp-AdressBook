@@ -392,7 +392,7 @@ class AddressBookPanel extends HTMLElement {
       const { errors, needs, values } = refresh(true);
       if (needs || Object.keys(errors).length) return;
       const msg = { type: "address_book/save" };
-      if (contact) msg.id = contact.id;
+      if (contact) msg.contact_id = contact.id;
       for (const f of FIELDS) msg[f] = values[f] || null;
       $("#save").disabled = true;
       try {
@@ -425,7 +425,7 @@ class AddressBookPanel extends HTMLElement {
     dlg.querySelector("#no").addEventListener("click", () => dlg.close());
     dlg.querySelector("#yes").addEventListener("click", async () => {
       try {
-        await this._hass.callWS({ type: "address_book/delete", id: c.id });
+        await this._hass.callWS({ type: "address_book/delete", contact_id: c.id });
         dlg.close();
         this._toast(t.deleted);
         await this._load();
